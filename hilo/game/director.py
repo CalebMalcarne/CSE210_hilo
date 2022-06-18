@@ -23,6 +23,7 @@ class Director:
         '''
         self.current_card = -1
         self.total_score = 300
+        self.card = Card()
     
     def start_game(self):
         """
@@ -52,9 +53,12 @@ class Director:
         print(f"\nThe card is: {self.current_card}")
 
     def get_next_card(self):
+        """ Calls Card class to get the next card
+
+        Args:
+            self(Director): An instance of Director
         """
-        """
-        return card.draw()
+        return self.card.draw()
     
     def get_inputs(self):
         '''Ask the user Higher or lower? and gets answer, checks input is good
