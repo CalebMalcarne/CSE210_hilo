@@ -1,4 +1,4 @@
-#from game.director import hilogame:
+from game.director import Director
 
-game = hilogame()
-game.startGame()
+game = Director()
+game.start_game()
