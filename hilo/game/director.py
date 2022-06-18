@@ -58,7 +58,7 @@ class Director:
         Args:
             self(Director): An instance of Director
         """
-        return self.card.draw()
+        return self.card.draw_Card()
     
     def get_inputs(self):
         '''Ask the user Higher or lower? and gets answer, checks input is good
@@ -68,7 +68,7 @@ class Director:
         '''
         inp = input("Higher or lower? [h/l] ")
 
-        while inp != 'h' or inp != 'l':
+        while inp != 'h' and inp != 'l':
             print(f"\nUnexpected input: {inp}\n")
             inp = input("Higher or lower? [h/l] ")
         
