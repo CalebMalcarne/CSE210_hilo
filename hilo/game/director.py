@@ -1,5 +1,6 @@
 # Code by Rebecca Roeth, CSE 210
 from game.card import Card
+
 # import random
 
 class Director:
@@ -102,6 +103,7 @@ class Director:
         '''
         if self.total_score > 0:
             playing = input("Play again? [y/n] ")
+            print('___________________')
             return (playing == "y")
         else:
             print("You lose, goodbye.")
