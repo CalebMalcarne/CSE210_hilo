@@ -1,5 +1,6 @@
 # Code by Rebecca Roeth, CSE 210
 from game.card import Card
+# import random
 
 class Director:
     '''
@@ -20,71 +21,77 @@ class Director:
         Args:
             self (Director): an instance of Director
         '''
-        self.cards = []
-        self.is_playing = True
-        self.score = 0
-            # Represents card played
-        self.h_l = ""
-            # Represents high/low choice
+        self.current_card = -1
         self.total_score = 300
-            # Represents total
-        
-    # Revisit this and see where applicable to this game
-        for i in range(5):
-            die = Die()
-            self.dice.append(die)
+        self.card = Card()
     
     def start_game(self):
-        """Starts the game by running the main game loop
+        """
+        Starts the game by running the main game loop which repeats until 
+        player does not want to continue or loses.
 
         Args:
             self (Director): an instance of director
         """
         # The game starts without asking if you want to play, unlike the dice
-        while self.is_playing:
-            self.do_firstcard
-            self.get_inputs() # High/Low choice
-            self.do_outputs()
-            self.still_playing()
+        is_playing = True
+        while is_playing:
+            self.do_current_card()
+            h_l = self.get_inputs() # High/Low choice
+            self.do_outputs(h_l)
+            is_playing = self.still_playing()
 
-    def do_firstcard(self):
+    def do_current_card(self):
         """Updates the player's score.
         
         Args:
             self(Director): An instance of Director
         """
-        if not self.is_playing:
-            return
+        if self.current_card < 0:
+            self.current_card = self.get_next_card()
     
-        # This probably doesn't work revisit
-        for i in range(len(self.cards)):
-            card = self.card[i]
-            drawn = card.draw()
+        print(f"\nThe card is: {self.current_card}")
 
-        print(f"\nThe card is: {drawn}")
+    def get_next_card(self):
+        """ Calls Card class to get the next card
+
+        Args:
+            self(Director): An instance of Director
+        """
+        return self.card.draw_Card()
     
     def get_inputs(self):
-        '''Ask the user if they want to keep playing
+        '''Ask the user Higher or lower? and gets answer, checks input is good
 
         Args:
             self (director): An instance of Director
         '''
-        self.h_l = input("Higher or lower? [h/l] ")
+        inp = input("Higher or lower? [h/l] ")
 
-    def do_outputs(self):
+        while inp != 'h' and inp != 'l':
+            print(f"\nUnexpected input: {inp}\n")
+            inp = input("Higher or lower? [h/l] ")
+        
+        return inp
+
+    def do_outputs(self, h_l):
         """Displays the card and the score. Also asks the player if they want to play again
         
         Args:
             self(Director): An instance of Director.
+            h_l: High or low in h or l characters.
         """
-        if not self.is_playing:
-            return
-        
-        for i in range(len(self.cards)):
-            card = self.card[i]
-            values += f"{card.value}"
-        
-        print(f"Next card was: {values}")
+        next_card = self.get_next_card()
+        print(f"Next card was: {next_card}")
+
+        # Scoring
+        if (h_l == 'h' and next_card > self.current_card) or (h_l == 'l' and next_card < self.current_card):
+            self.total_score += 100
+        else:
+            self.total_score -= 75
+
+        self.current_card = next_card
+
         print(f"Your score is: {self.total_score}")
 
     def still_playing(self):
@@ -93,5 +100,9 @@ class Director:
             Args:
             self (director): An instance of Director
         '''
-        playing = input("Play again? [y/n] ")
-        self.is_playing = (playing == "y")
+        if self.total_score > 0:
+            playing = input("Play again? [y/n] ")
+            return (playing == "y")
+        else:
+            print("You lose, goodbye.")
+            return False

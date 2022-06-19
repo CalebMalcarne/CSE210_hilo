@@ -6,3 +6,4 @@ class Card():
 
     def draw_Card(self):
         self._value = random.randint(1,13)
+        return self._value

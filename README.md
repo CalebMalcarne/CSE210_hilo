@@ -27,7 +27,7 @@ root                    (Project root folder)
 |__ hilo                (source code)
     |__ game            (classes folder`)
         |__ card.py
-        |__ direcror.py
+        |__ director.py
     |__ __main__.py     (program main)
 |__ README.md           (info)
 ```
@@ -36,4 +36,5 @@ root                    (Project root folder)
 
 ## Authors
 * Caleb Malcarne (mal18002@byui.edu)
-* intert your info here please  
+* Rebecca Roeth (roe21002@byui.edu)
+* insert your info here please  
