@@ -5,7 +5,7 @@ Welcome to the **_Hi-Low_** card game! a game of chance!, There are a few simple
 2. the game start with a randomly drawn card **[1-13]**
 3. each turn you guess wether the next card    will be high or low **[h/l]**
 4. if you guess correctly and the card was higher you gain **100** points if you guess wrong you lose **75** points
-5. keep goueesing correc ly to increase your scroe, if you reach **0** or lower you lose
+5. keep guessing correctly to increase your scroe, if you reach **0** or lower you lose
 
 ---
 
